@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="description" content="Soporte técnico, licencias Office, antivirus y redes en Guatemala con Trevix">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trevix | Soluciones Tecnológicas</title>
@@ -9,200 +8,107 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:'Poppins',sans-serif;
-  background:#0a0f1f;
-  color:#fff;
-  overflow-x:hidden;
-}
-
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 40px;
-  position:fixed;
-  width:100%;
-  background:rgba(10,15,31,0.8);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-}
-
-nav a{
-  color:#fff;
-  margin:0 15px;
-  text-decoration:none;
-  transition:.3s;
-}
+body{font-family:'Poppins',sans-serif;background:#0a0f1f;color:#fff}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;position:fixed;width:100%;background:rgba(10,15,31,0.8);backdrop-filter:blur(10px);z-index:1000}
+nav a{color:#fff;margin:0 15px;text-decoration:none;transition:.3s}
 nav a:hover{color:#00f7ff}
-
-.hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  background:linear-gradient(135deg,#0a0f1f,#111c3a);
-}
-
-.hero h1{
-  font-size:60px;
-  background:linear-gradient(90deg,#00f7ff,#1e90ff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#0a0f1f,#111c3a)}
+.hero h1{font-size:60px;background:linear-gradient(90deg,#00f7ff,#1e90ff);-webkit-background-clip:text;color:transparent}
 .hero p{max-width:600px;margin-top:20px;opacity:.8}
-
-.btn{
-  margin-top:30px;
-  padding:15px 30px;
-  background:linear-gradient(90deg,#00f7ff,#1e90ff);
-  border:none;
-  border-radius:30px;
-  color:#000;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
-}
+.btn{margin-top:30px;padding:15px 30px;background:linear-gradient(90deg,#00f7ff,#1e90ff);border:none;border-radius:30px;color:#000;font-weight:600;cursor:pointer;transition:.3s}
 .btn:hover{transform:scale(1.1)}
-
 .section{padding:100px 40px}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:30px;
-}
-
-.card{
-  background:#111c3a;
-  padding:30px;
-  border-radius:20px;
-  transition:.4s;
-  border:1px solid rgba(255,255,255,0.05);
-}
-
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 0 20px #00f7ff33;
-}
-
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.card{background:#111c3a;padding:30px;border-radius:20px;transition:.4s;border:1px solid rgba(255,255,255,0.05)}
+.card:hover{transform:translateY(-10px);box-shadow:0 0 20px #00f7ff33}
 .card h3{margin-bottom:10px;color:#00f7ff}
-
-.stats{
-  display:flex;
-  justify-content:space-around;
-  text-align:center;
-}
-
-.stat h2{font-size:40px;color:#00f7ff}
-
-footer{
-  text-align:center;
-  padding:40px;
-  background:#050814;
-}
-
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  width:60px;
-  height:60px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  border-radius:50%;
-  font-weight:bold;
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 0 15px #25D366;
-}
-
+.problem{background:#050814;text-align:center}
+.problem h2{margin-bottom:30px}
+.problem p{margin:10px 0;font-size:18px}
+.pricing{background:#0d1328}
+.price-card{background:#111c3a;padding:40px;border-radius:20px;text-align:center;border:1px solid rgba(255,255,255,0.05)}
+.price-card h3{color:#00f7ff}
+.price{font-size:40px;margin:20px 0}
+footer{text-align:center;padding:40px;background:#050814}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;width:60px;height:60px;display:flex;justify-content:center;align-items:center;border-radius:50%;color:#fff;text-decoration:none;box-shadow:0 0 15px #25D366}
 </style>
 </head>
-
 <body>
 
 <header>
-  <h2>Trevix</h2>
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#stats">Impacto</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
+<h2>Trevix</h2>
+<nav>
+<a href="#">Inicio</a>
+<a href="#servicios">Servicios</a>
+<a href="#planes">Planes</a>
+<a href="#contacto">Contacto</a>
+</nav>
 </header>
 
 <section class="hero">
-  <h1>Tecnología que impulsa tu negocio</h1>
-  <p>En Trevix llevamos tu empresa al siguiente nivel con soluciones profesionales: software, seguridad, redes y automatización.</p>
-  <a href="https://wa.me/50240218091"><button class="btn">Contactar ahora</button></a>
+<h1>Impulsamos negocios con tecnología inteligente</h1>
+<p>Licencias, soporte técnico, redes y asesoría profesional para llevar tu empresa al siguiente nivel.</p>
+<a href="https://wa.me/50240218091"><button class="btn">Solicitar ayuda</button></a>
+</section>
+
+<section class="section problem">
+<h2>¿Tienes estos problemas?</h2>
+<p>❌ Computadoras lentas o con errores</p>
+<p>❌ Problemas con Office o licencias</p>
+<p>❌ Redes inestables en tu negocio</p>
+<p>❌ Falta de sistema contable</p>
+
+<h2 style="margin-top:40px">✅ Nosotros lo solucionamos</h2>
 </section>
 
 <section id="servicios" class="section">
-  <h2 style="text-align:center;margin-bottom:50px">Nuestros Servicios</h2>
-  <div class="grid">
-
-    <div class="card">
-      <h3>Licenciamiento</h3>
-      <p>Office 2016, 2019, 2021 y Microsoft 365 completamente activados.</p>
-    </div>
-
-    <div class="card">
-      <h3>Antivirus</h3>
-      <p>Protección con ESET y McAfee contra virus y amenazas digitales.</p>
-    </div>
-
-    <div class="card">
-      <h3>Redes</h3>
-      <p>Diagnóstico, solución y optimización de redes empresariales.</p>
-    </div>
-
-    <div class="card">
-      <h3>Sistemas Contables</h3>
-      <p>Implementación de software para control financiero.</p>
-    </div>
-
-    <div class="card">
-      <h3>Asesoría Tecnológica</h3>
-      <p>Te ayudamos a elegir lo mejor en hardware y software.</p>
-    </div>
-
-    <div class="card">
-      <h3>Automatización</h3>
-      <p>Soluciones digitales para mejorar productividad.</p>
-    </div>
-
-  </div>
+<h2 style="text-align:center;margin-bottom:50px">Servicios</h2>
+<div class="grid">
+<div class="card"><h3>Licenciamiento</h3><p>Office, Microsoft 365 y activaciones seguras.</p></div>
+<div class="card"><h3>Antivirus</h3><p>ESET y McAfee para máxima protección.</p></div>
+<div class="card"><h3>Redes</h3><p>Diagnóstico y optimización empresarial.</p></div>
+<div class="card"><h3>Sistemas</h3><p>Software contable para negocios.</p></div>
+<div class="card"><h3>Asesoría</h3><p>Compra inteligente de tecnología.</p></div>
+<div class="card"><h3>Automatización</h3><p>Optimiza tu negocio con tecnología.</p></div>
+</div>
 </section>
 
-<section id="stats" class="section stats">
-  <div class="stat">
-    <h2>+100</h2>
-    <p>Clientes</p>
-  </div>
-  <div class="stat">
-    <h2>+500</h2>
-    <p>Equipos optimizados</p>
-  </div>
-  <div class="stat">
-    <h2>24/7</h2>
-    <p>Soporte</p>
-  </div>
+<section id="planes" class="section pricing">
+<h2 style="text-align:center;margin-bottom:50px">Planes</h2>
+<div class="grid">
+
+<div class="price-card">
+<h3>Básico</h3>
+<div class="price">Q150</div>
+<p>Soporte básico</p>
+<p>Instalaciones simples</p>
+</div>
+
+<div class="price-card">
+<h3>Empresarial</h3>
+<div class="price">Q300</div>
+<p>Soporte completo</p>
+<p>Redes + antivirus</p>
+</div>
+
+<div class="price-card">
+<h3>Premium</h3>
+<div class="price">Q500</div>
+<p>Soporte total</p>
+<p>Atención prioritaria</p>
+</div>
+
+</div>
 </section>
 
 <section id="contacto" class="section" style="text-align:center">
-  <h2>¿Listo para mejorar tu tecnología?</h2>
-  <p>Contáctanos y llevemos tu negocio al siguiente nivel</p>
-  <a href="https://wa.me/50240218091"><button class="btn">Escríbenos</button></a>
+<h2>¿Listo para mejorar tu negocio?</h2>
+<p>Contáctanos ahora y recibe atención inmediata</p>
+<a href="https://wa.me/50240218091"><button class="btn">Escríbenos</button></a>
 </section>
 
 <footer>
-  <p>© 2026 Trevix | Soluciones Tecnológicas</p>
+<p>© 2026 Trevix | Tecnología Inteligente</p>
 </footer>
 
 <a class="whatsapp" href="https://wa.me/50240218091">W</a>
