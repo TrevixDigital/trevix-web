@@ -1,0 +1,30 @@
+{
+  "assets": [
+    {
+      "name": "stadium-desktop.webp",
+      "width": 2020,
+      "height": 778,
+      "bytes": 248260
+    },
+    {
+      "name": "stadium-mobile.webp",
+      "width": 1000,
+      "height": 1500,
+      "bytes": 249780
+    },
+    {
+      "name": "stadium-backdrop.webp",
+      "width": 1400,
+      "height": 116,
+      "bytes": 10716
+    }
+  ],
+  "logo": {
+    "width": 640,
+    "height": 640,
+    "transparentPixels": 168518,
+    "cleanedEdgePixels": 2286,
+    "protectedWhitePixels": 13600,
+    "hasAlpha": true
+  }
+}
