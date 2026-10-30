@@ -52,6 +52,10 @@ export async function savePlayerAction(
     revalidatePath("/mundialito/admin/jugadores");
     revalidatePath(`/mundialito/equipos/${result.team.slug}`);
     revalidatePath(`/mundialito/jugadores/${publicPlayerSlug(result.player)}`);
+    // Name and active-state changes also affect cached statistics and match cards.
+    for (const path of ["/mundialito/estadisticas", "/mundialito/equipos", "/mundialito/admin/estadisticas"])
+      revalidatePath(path);
+    revalidatePath("/mundialito/partidos/[id]", "page");
     return {
       error: "",
       success: {

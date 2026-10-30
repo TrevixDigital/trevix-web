@@ -41,3 +41,16 @@ test("acta sencilla: un finalizado sin marcador se puede corregir sin recargar y
  const result=await saveSimpleActa(client,binding,{status:"finished",home_score:"",away_score:"",home_penalties:"",away_penalties:"",totals:playerTotals(binding)});
  assert.match(result.error,/ambos marcadores/);assert.equal(result.retryOnly,false);assert.deepEqual(result.completed,[]);
 });
+
+test("acta sencilla: resultado eliminatorio bloqueado antes de guardar tarjetas o goles si el avance seguro está apagado",async(t)=>{
+ const old=process.env.SUPABASE_KNOCKOUT_PROGRESS_ENABLED;
+ process.env.SUPABASE_KNOCKOUT_PROGRESS_ENABLED="false";
+ t.after(()=>{if(old===undefined)delete process.env.SUPABASE_KNOCKOUT_PROGRESS_ENABLED;else process.env.SUPABASE_KNOCKOUT_PROGRESS_ENABLED=old;});
+ let tableCalls=0;
+ const client={auth:{getUser:async()=>({data:{user:{id:uuid(800)}},error:null})},rpc:async()=>({data:true,error:null}),from(){tableCalls++;throw Error("No iniciar operaciones de tablas");}} as unknown as SupabaseClient;
+ const knockout={...binding,phase:"round_of_16"};
+ const totals=playerTotals(knockout);totals[0].goals=1;
+ const result=await saveSimpleActa(client,knockout,{status:"finished",home_score:"1",away_score:"0",home_penalties:"",away_penalties:"",totals});
+ assert.match(result.error,/avance seguro.*desactivado/i);
+ assert.deepEqual(result.completed,[]);assert.equal(result.retryOnly,false);assert.equal(tableCalls,0);
+});

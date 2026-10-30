@@ -12,7 +12,7 @@ import { phase4Capabilities } from "./capabilities.ts";
 import { playerTotals, validateTotals, goalTotals, type SimpleBinding, type SimpleInput, type SimpleSaveState } from "./simple-acta.ts";
 import type { OfficialEvent } from "./model.ts";
 import { cardRegistrationCapabilities, registrationSnapshot, registerReviewedCards } from "./card-registration.ts";
-import { assertKnockoutDependencies,assertKnockoutDatabaseReady,knockoutProgressionEnabled } from "../matches/progression.ts";
+import { assertKnockoutDependencies,assertKnockoutDatabaseReady,assertKnockoutResultWriteEnabled,knockoutProgressionEnabled } from "../matches/progression.ts";
 
 // This queue serializes this server's coordinated saves. Database CAS/RPC checks
 // remain necessary: it is not a distributed database transaction or lock.
@@ -44,6 +44,7 @@ export async function saveSimpleActa(client: SupabaseClient, binding: SimpleBind
     if (!isUuid(binding.id) || !isUuid(binding.operationId)) throw new RosterError("SCOPE", "Identidad del partido inválida.");
     const totals = validateTotals(input.totals, binding);
     const target = validateMatchValues({...binding.values, status:input.status, home_score:input.home_score, away_score:input.away_score, home_penalties:input.home_penalties, away_penalties:input.away_penalties}, binding.phase);
+    assertKnockoutResultWriteEnabled(binding.phase,binding.values,target);
     if(binding.phase!=="groups"&&knockoutProgressionEnabled())await assertKnockoutDatabaseReady(client);
     const initial = playerTotals(binding);
     const changedCards = totals.filter(r => {

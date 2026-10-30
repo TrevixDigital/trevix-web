@@ -1,10 +1,24 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { knockoutOutcome,bracketDefinitions } from "../../src/lib/mundialito/engine/bracket.ts";
-import { assertKnockoutDatabaseReady,knockoutProgressionEnabled } from "../../src/lib/mundialito/matches/progression.ts";
+import { assertKnockoutDatabaseReady,assertKnockoutResultWriteEnabled,knockoutProgressionEnabled } from "../../src/lib/mundialito/matches/progression.ts";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { adminFetch } from "../../src/lib/mundialito/admin/transport.ts";
 import { uuid } from "./supabase-fixtures.ts";
+import type { MatchValues } from "../../src/lib/mundialito/matches/model.ts";
+
+test("avance: protege cambios de resultado y penales sin bloquear horarios o estadísticas con resultado intacto",()=>{
+ const before:MatchValues={status:"scheduled",home_score:null,away_score:null,home_penalties:null,away_penalties:null,scheduled_at:null,venue:null,notes:null};
+ const disabled={SUPABASE_KNOCKOUT_PROGRESS_ENABLED:"false"};
+ const patches:Partial<MatchValues>[]=[{status:"live"},{home_score:1},{away_score:0},{home_penalties:4},{away_penalties:5}];
+ for(const patch of patches)
+  assert.throws(()=>assertKnockoutResultWriteEnabled("round_of_16",before,{...before,...patch},disabled),/avance seguro.*desactivado/i);
+ assert.doesNotThrow(()=>assertKnockoutResultWriteEnabled("groups",before,{...before,status:"finished",home_score:1,away_score:0},disabled));
+ assert.doesNotThrow(()=>assertKnockoutResultWriteEnabled("quarterfinals",before,{...before,scheduled_at:"2026-11-01T18:00:00Z"},disabled));
+ assert.doesNotThrow(()=>assertKnockoutResultWriteEnabled("final",before,{...before},disabled));
+ const approved={NEXT_PUBLIC_SUPABASE_URL:"https://vhryyxplhefmpykumvma.supabase.co",SUPABASE_PHASE4_READ_ENABLED:"true",SUPABASE_PHASE4_WRITE_TARGET:"production",SUPABASE_KNOCKOUT_PROGRESS_ENABLED:"true",SUPABASE_KNOCKOUT_PRODUCTION_WRITES_APPROVED:"true"};
+ assert.doesNotThrow(()=>assertKnockoutResultWriteEnabled("final",before,{...before,status:"finished",home_score:1,away_score:0},approved));
+});
 
 test("avance: ganador normal, penales separados, empate sin ganador y perdedor",()=>{
  assert.deepEqual(knockoutOutcome("home","away",3,1),{winnerId:"home",loserId:"away"});
