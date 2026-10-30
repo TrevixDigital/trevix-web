@@ -14,6 +14,18 @@ export function knockoutProgressionEnabled(env:Record<string,string|undefined>=p
   return c.read&&env.SUPABASE_KNOCKOUT_PROGRESS_ENABLED==="true"&&(c.isolated||(
     env.SUPABASE_PHASE4_WRITE_TARGET==="production"&&env.SUPABASE_KNOCKOUT_PRODUCTION_WRITES_APPROVED==="true"&&env.NEXT_PUBLIC_SUPABASE_URL==="https://vhryyxplhefmpykumvma.supabase.co"));
 }
+/** Match SQL rejects these changes without the atomic knockout RPC. Fail before
+ * the simple coordinator commits any independent card or goal operations. */
+export function assertKnockoutResultWriteEnabled(
+  phase:string,before:Record<string,unknown>|MatchValues,target:MatchValues,
+  env:Record<string,string|undefined>=process.env,
+) {
+  if(phase==="groups")return;
+  const changed=(["status","home_score","away_score","home_penalties","away_penalties"] as const)
+    .some(key=>before[key]!==target[key]);
+  if(changed&&!knockoutProgressionEnabled(env))
+    throw new RosterError("CAPABILITY","El avance seguro de eliminatorias está desactivado. No se guardó ninguna sección; revisa su activación antes de cambiar el resultado o los penales.");
+}
 /** Early UX check before the simple coordinator writes events. SQL rechecks atomically. */
 export function assertKnockoutDependencies(context:Awaited<ReturnType<typeof readAdminMatches>>,id:string,target:MatchValues) {
   const source=context.metadata.matches.find(m=>m.id===id);

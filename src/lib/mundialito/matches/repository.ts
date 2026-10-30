@@ -19,7 +19,7 @@ import { createCompetitionReport } from "../repositories/competition-report.ts";
 import { calendarIntegrity } from "./integrity.ts";
 import { phase4Capabilities } from "../events/capabilities.ts";
 import { applyClassificationDecisions } from "../events/classification-decisions.ts";
-import { assertKnockoutDependencies,knockoutProgressionEnabled } from "./progression.ts";
+import { assertKnockoutDependencies,assertKnockoutResultWriteEnabled,knockoutProgressionEnabled } from "./progression.ts";
 export async function readAdminMatches(
   client: SupabaseClient,
   includeEvents = false,
@@ -120,6 +120,7 @@ export async function saveAdminMatch(
   )
     values.scheduled_at = before.scheduled_at;
   const changed = !sameValues(before, values);
+  assertKnockoutResultWriteEnabled(before.phase as string,before,values);
   if (changed && before.updated_at !== input.version)
     throw new RosterError(
       "CONFLICT",

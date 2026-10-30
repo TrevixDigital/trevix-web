@@ -182,6 +182,10 @@ test("acción: ignora identidad en FormData y revalida perfiles solo después de
     "/mundialito/admin/jugadores",
     "/mundialito/equipos/la-bomba",
     `/mundialito/jugadores/${player.slug}`,
+    "/mundialito/estadisticas",
+    "/mundialito/equipos",
+    "/mundialito/admin/estadisticas",
+    "/mundialito/partidos/[id]",
   ]);
 });
 test("acción: un fallo de guardado no muestra éxito, no invalida y no filtra el mensaje interno", async () => {
